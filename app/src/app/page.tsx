@@ -1,3 +1,4 @@
+import { Sidebar } from '@/components/Sidebar/Sidebar';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Image from 'next/image';
@@ -7,31 +8,7 @@ export default function Home() {
   return (
     <Container maxWidth={false} disableGutters>
       <Box sx={{ display: 'flex', height: '100vh' }}>
-        {/* Side navbar */}
-        <Box
-          sx={{
-            width: 150,
-            bgcolor: '#23272a',
-            color: '#fff',
-            flexShrink: 0,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            // py: 4,
-            minHeight: '100vh', // Ensures full-height sidebar
-            position: 'sticky', // Optional: keeps it on scroll in longer pages
-            top: 0,
-          }}
-        >
-          <Image 
-            src='/gambit.png'
-            alt='Gambit Logo'
-            width={500}
-            height={500}
-            priority
-          />
-          
-        </Box>
+        <Sidebar />
       </Box>
     </Container>
     // <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
