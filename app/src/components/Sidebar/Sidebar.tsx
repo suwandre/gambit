@@ -14,7 +14,7 @@ export const Sidebar = () => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        py: 3,
+        py: 12,
       }}
     >
       {/** Upper component below image in sidebar */}
