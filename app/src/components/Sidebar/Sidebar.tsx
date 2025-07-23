@@ -7,8 +7,8 @@ export const Sidebar = () => {
   return (
     <Box
       sx={{
-        width: 160,
-        bgcolor: '#23272a',
+        width: 150,
+        bgcolor: '#262522',
         color: '#fff',
         minHeight: '100vh',
         display: 'flex',

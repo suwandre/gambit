@@ -27,7 +27,7 @@ export const ChessSquareComponent = ({
       sx={{
         width: squareSize,
         height: squareSize,
-        backgroundColor: isLight ? '#f0d9b5' : '#b58863',
+        backgroundColor: isLight ? '#EBECD0' : '#779556',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',

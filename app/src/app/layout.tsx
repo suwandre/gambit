@@ -78,6 +78,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={atGambit.variable}
+        style={{backgroundColor: '#302E2B'}}
       >
         <ThemeRegistry>
           {children}

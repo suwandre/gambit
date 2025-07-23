@@ -1,5 +1,6 @@
 'use client';
 
+import { MainPage } from '@/components/Main/MainPage';
 import { Sidebar } from '@/components/Sidebar/Sidebar';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
@@ -10,7 +11,7 @@ export default function Home() {
     <Container maxWidth={false} disableGutters>
       <Box sx={{ display: 'flex', height: '100vh' }}>
         <Sidebar />
-        {/* <ChessboardComponent squareSize={60} board={generateBaseChessboard()} onSquareClick={({rank, file}) => console.log(`clicked square at ${rank}, ${file}`)} /> */}
+        <MainPage />
       </Box>
     </Container>
   );

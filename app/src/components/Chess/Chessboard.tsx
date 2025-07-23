@@ -14,7 +14,7 @@ type ChessboardComponentProps = {
 export const ChessboardComponent = ({
   board,
   onSquareClick,
-  squareSize = 40, // Default square size
+  squareSize = 60, // Default square size
 }: ChessboardComponentProps) => {
   const renderBoard = () => {
     const squares = [];
@@ -51,7 +51,6 @@ export const ChessboardComponent = ({
       display: 'grid',
       gridTemplateColumns: `repeat(8, ${squareSize}px)`,
       gridTemplateRows: `repeat(8, ${squareSize}px)`,
-      border: '2px solid #b58863',
       borderRadius: '8px',
       boxShadow: 2,
       width: `${squareSize * 8}px`,
