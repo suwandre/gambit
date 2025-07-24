@@ -2,8 +2,13 @@ import Box from '@mui/material/Box';
 import { SidebarNav } from './SidebarNav';
 import { SidebarLoginButton } from '../Button/LoginButton';
 import Image from 'next/image';
+import { useState } from 'react';
+import { LoginModal } from '../Auth/LoginModal';
 
 export const Sidebar = () => {
+  // Login modal when login button is clicked
+  const [loginOpen, setLoginOpen] = useState(false);
+
   return (
     <Box
       sx={{
@@ -31,7 +36,9 @@ export const Sidebar = () => {
         <SidebarNav />
       </Box>
       {/** Lower component at the bottom of the sidebar */}
-      <SidebarLoginButton />
+      <SidebarLoginButton onClick={() => setLoginOpen(true)} />
+      {/** Login modal; opened when login button is clicked */}
+      <LoginModal open={loginOpen} onClose={() => setLoginOpen(false)} />
     </Box>
   );
 };
