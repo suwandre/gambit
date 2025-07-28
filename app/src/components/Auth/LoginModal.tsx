@@ -7,17 +7,26 @@ import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
-import { FaGoogle, FaFacebook, FaApple } from 'react-icons/fa';
 import Image from 'next/image';
 import Divider from '@mui/material/Divider';
+import { FaFacebook, FaApple, FaGoogle } from 'react-icons/fa';
+
+// You can use the official MetaMask SVG logo or a PNG from /public/metamask.png
+// For demo, let's use public/metamask.png, assuming you have it in /public
 
 type LoginModalProps = {
   open: boolean;
   onClose: () => void;
   onSignupClick?: () => void;
+  onMetaMaskConnect?: () => void; // handler for connecting wallet
 };
 
-export function LoginModal({ open, onClose, onSignupClick }: LoginModalProps) {
+export function LoginModal({
+  open,
+  onClose,
+  onSignupClick,
+  onMetaMaskConnect,
+}: LoginModalProps) {
   return (
     <Dialog
       open={open}
@@ -27,34 +36,31 @@ export function LoginModal({ open, onClose, onSignupClick }: LoginModalProps) {
           sx: {
             borderRadius: 3,
             p: 2,
-            minWidth: 350,
-            maxWidth: 400,
-            overflow: 'visible', // Allow content to extend outside
+            minWidth: 400,
+            maxWidth: 500,
+            overflow: 'visible',
           },
         },
         backdrop: {
           sx: {
-            backgroundColor: 'rgba(0, 0, 0, 0.8)', // Make backdrop darker
+            backgroundColor: 'rgba(0, 0, 0, 0.8)',
           },
         },
       }}
     >
-      {/* Wrapper Box to contain both modal and close button */}
       <Box sx={{ position: 'relative' }}>
-        {/* Close button positioned absolutely outside */}
+        {/* Close Button */}
         <IconButton
           onClick={onClose}
           sx={{
             position: 'absolute',
-            right: -80,
-            top: -20,
-            // backgroundColor: 'rgba(0, 0, 0, 0.6)',
+            right: -60,
+            top: -35,
             color: 'white',
+            zIndex: 9999,
             '&:hover': {
-              backgroundColor: 'transparent',
               color: '#70A547',
             },
-            zIndex: 9999,
           }}
         >
           <CloseIcon sx={{ fontSize: 30 }} />
@@ -65,8 +71,8 @@ export function LoginModal({ open, onClose, onSignupClick }: LoginModalProps) {
             <Image
               src='/gambit.png'
               alt='Gambit Logo'
-              width={200}
-              height={200}
+              width={120}
+              height={120}
               priority
             />
           </Box>
@@ -74,94 +80,40 @@ export function LoginModal({ open, onClose, onSignupClick }: LoginModalProps) {
 
         <DialogContent>
           <Box display='flex' flexDirection='column' gap={2} mt={2}>
-            {/* Traditional Username/Password */}
+            {/* WEB3 LOGIN */}
             <Button
               variant='contained'
               fullWidth
+              startIcon={
+                <Image
+                  src='/metamask.svg'
+                  alt='Metamask Logo'
+                  width={28}
+                  height={28}
+                  style={{ marginRight: '1.75rem' }}
+                />
+              }
               sx={{
-                backgroundColor: '#70A547',
+                backgroundColor: '#1E1D1A',
+                color: '#DCDCDC',
                 textTransform: 'none',
-                mb: 1.5,
-                fontWeight: 700,
-              }}
-            >
-              Login with Account
-            </Button>
-
-            <Divider
-              sx={{
-                my: 1.5 /* vertical spacing */,
-                '&::before, &::after': {
-                  borderColor: '#ccc' /* line colour */,
+                fontWeight: 600,
+                fontSize: '1.1rem',
+                '&:hover': {
+                  backgroundColor: 'rgba(0, 0, 0, 0.8)',
                 },
               }}
+              onClick={onMetaMaskConnect} // YOU connect here
             >
-              <Typography align='center' sx={{ color: '#939393' }}>
-                or
-              </Typography>
-            </Divider>
-
-            {/* Social Media Buttons */}
-            <Button
-              variant='outlined'
-              fullWidth
-              startIcon={<FaGoogle />}
-              sx={{
-                textTransform: 'none',
-                borderColor: '#ccc',
-                mb: 1,
-                fontWeight: 600,
-              }}
-            >
-              Continue with Google
+              Connect with MetaMask
             </Button>
 
-            <Button
-              variant='outlined'
-              fullWidth
-              startIcon={<FaFacebook color='#0866ff' />}
-              sx={{
-                textTransform: 'none',
-                borderColor: '#ccc',
-                mb: 1,
-                fontWeight: 600,
-              }}
-            >
-              Continue with Facebook
-            </Button>
-
-            <Button
-              variant='outlined'
-              fullWidth
-              startIcon={<FaApple />}
-              sx={{
-                textTransform: 'none',
-                borderColor: '#ccc',
-                fontWeight: 600,
-              }}
-            >
-              Continue with Apple
-            </Button>
+            {/* Alternative: more Web3 options
+            <Button ...>Connect with Coinbase Wallet</Button>
+            <Button ...>Connect with WalletConnect</Button>
+            */}
           </Box>
         </DialogContent>
-
-        <DialogActions sx={{ justifyContent: 'center', pt: 2 }}>
-          <Typography variant='body2' color='text.secondary' align='center'>
-            New?&nbsp;
-            <Button
-              sx={{
-                textTransform: 'none',
-                fontWeight: 700,
-                color: '#70A547',
-                p: 0,
-                minWidth: 0,
-              }}
-              onClick={onSignupClick}
-            >
-              Sign Up - and start playing chess!
-            </Button>
-          </Typography>
-        </DialogActions>
       </Box>
     </Dialog>
   );
