@@ -1,8 +1,8 @@
-import type { Metadata } from "next";
+import type { Metadata } from 'next';
 import localFont from 'next/font/local';
-import "./globals.css";
+import './globals.css';
 import ThemeRegistry from '@/components/ThemeRegistry';
-
+import { CustomWagmiProvider } from '@/components/WagmiProvider';
 const atGambit = localFont({
   src: [
     // Black
@@ -61,12 +61,12 @@ const atGambit = localFont({
       style: 'italic',
     },
   ],
-  variable: '--font-atgambit'
+  variable: '--font-atgambit',
 });
 
 export const metadata: Metadata = {
-  title: "Gambit",
-  description: "Web3 Chess Platform",
+  title: 'Gambit',
+  description: 'Web3 Chess Platform',
 };
 
 export default function RootLayout({
@@ -75,14 +75,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang='en'>
       <body
         className={atGambit.variable}
-        style={{backgroundColor: '#302E2B'}}
+        style={{ backgroundColor: '#302E2B' }}
       >
-        <ThemeRegistry>
-          {children}
-        </ThemeRegistry>
+        <CustomWagmiProvider>
+          <ThemeRegistry>{children}</ThemeRegistry>
+        </CustomWagmiProvider>
       </body>
     </html>
   );

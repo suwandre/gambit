@@ -1,18 +1,11 @@
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
-import DialogActions from '@mui/material/DialogActions';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import Image from 'next/image';
-import Divider from '@mui/material/Divider';
-import { FaFacebook, FaApple, FaGoogle } from 'react-icons/fa';
-
-// You can use the official MetaMask SVG logo or a PNG from /public/metamask.png
-// For demo, let's use public/metamask.png, assuming you have it in /public
 
 type LoginModalProps = {
   open: boolean;
