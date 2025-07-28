@@ -1,11 +1,11 @@
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
-import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Image from 'next/image';
+import { WalletOptions } from './WalletOptions';
 
 type LoginModalProps = {
   open: boolean;
@@ -20,6 +20,7 @@ export function LoginModal({
   onSignupClick,
   onMetaMaskConnect,
 }: LoginModalProps) {
+
   return (
     <Dialog
       open={open}
@@ -73,38 +74,7 @@ export function LoginModal({
 
         <DialogContent>
           <Box display='flex' flexDirection='column' gap={2} mt={2}>
-            {/* WEB3 LOGIN */}
-            <Button
-              variant='contained'
-              fullWidth
-              startIcon={
-                <Image
-                  src='/metamask.svg'
-                  alt='Metamask Logo'
-                  width={28}
-                  height={28}
-                  style={{ marginRight: '1.75rem' }}
-                />
-              }
-              sx={{
-                backgroundColor: '#1E1D1A',
-                color: '#DCDCDC',
-                textTransform: 'none',
-                fontWeight: 600,
-                fontSize: '1.1rem',
-                '&:hover': {
-                  backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                },
-              }}
-              onClick={onMetaMaskConnect} // YOU connect here
-            >
-              Connect with MetaMask
-            </Button>
-
-            {/* Alternative: more Web3 options
-            <Button ...>Connect with Coinbase Wallet</Button>
-            <Button ...>Connect with WalletConnect</Button>
-            */}
+            <WalletOptions />
           </Box>
         </DialogContent>
       </Box>

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
 import ThemeRegistry from '@/components/ThemeRegistry';
-import { CustomWagmiProvider } from '@/components/WagmiProvider';
+import { CustomWagmiProvider } from '@/components/Wagmi/WagmiProvider';
 const atGambit = localFont({
   src: [
     // Black

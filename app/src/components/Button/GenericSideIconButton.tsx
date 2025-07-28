@@ -5,9 +5,15 @@ import Typography from '@mui/material/Typography';
 type GenericSideIconButtonProps = ButtonProps & {
   icon: React.ReactNode;
   title: string;
-  subtitle: string;
+  subtitle?: string;
   customBg?: string;
   customHover?: string;
+  titleFontWeight?: number;
+  titleFontSize?: string;
+  subtitleFontSize?: string;
+  subtitleFontWeight?: number;
+  // Margin from icon to title/subtitle
+  marginFromIcon?: number;
 };
 
 export const GenericSideIconButton = ({
@@ -16,6 +22,11 @@ export const GenericSideIconButton = ({
   subtitle,
   customBg,
   customHover,
+  titleFontWeight,
+  titleFontSize,
+  subtitleFontWeight,
+  subtitleFontSize,
+  marginFromIcon,
   sx,
   ...props
 }: GenericSideIconButtonProps) => (
@@ -48,7 +59,7 @@ export const GenericSideIconButton = ({
         alignItems: 'center',
         justifyContent: 'center',
         height: '100%',
-        mr: 5,
+        mr: marginFromIcon ?? 5,
       }}
     >
       {icon}
@@ -68,7 +79,8 @@ export const GenericSideIconButton = ({
       <Typography
         variant='h5'
         component='div'
-        fontWeight={700}
+        fontWeight={titleFontWeight ?? 700}
+        fontSize={titleFontSize ?? '1.2rem'}
         sx={{ color: '#fff' }}
       >
         {title}
@@ -76,6 +88,8 @@ export const GenericSideIconButton = ({
       <Typography
         variant='subtitle2'
         component='div'
+        fontWeight={subtitleFontWeight ?? 500}
+        fontSize={subtitleFontSize ?? '0.8rem'}
         sx={{ color: '#fff', opacity: 0.85 }}
       >
         {subtitle}
