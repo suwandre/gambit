@@ -4,6 +4,8 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { ChessSquareComponent } from './ChessSquare';
 import { Board, Piece, Position } from '@/types/chess';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 type ChessboardComponentProps = {
   board: Board;
@@ -16,6 +18,19 @@ export const ChessboardComponent = ({
   onSquareClick,
   squareSize = 60, // Default square size
 }: ChessboardComponentProps) => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isTablet = useMediaQuery(theme.breakpoints.down('md'));
+
+  // Responsive square sizing
+  const getSquareSize = () => {
+    if (isMobile) return 32; // Small squares on mobile
+    if (isTablet) return 48; // Medium squares on tablet
+    return 60; // Full size on desktop
+  };
+
+  squareSize = getSquareSize();
+
   const renderBoard = () => {
     const squares = [];
     // Horizontal squares
@@ -58,7 +73,7 @@ export const ChessboardComponent = ({
       overflow: 'hidden',
       userSelect: 'none',
       p: 0,
-      m: 0,
+      mx: 'auto', // Center the board
     }}
   >
     {renderBoard()}

@@ -43,9 +43,9 @@ export const GenericSideIconButton = ({
       backgroundColor: customBg ?? '#81B64C',
       color: '#fff',
       borderRadius: 3,
-      height: height ?? 100,
+      height: height || { xs: 80, sm: 100 }, // Responsive default height
       width: width ?? '100%',
-      minWidth: minWidth ?? 340,
+      minWidth: minWidth || { xs: 280, sm: 340 }, // Responsive minimum width
       textTransform: 'none',
       justifyContent: 'center',
       alignItems: 'stretch',
@@ -60,12 +60,12 @@ export const GenericSideIconButton = ({
     {/* Icon: fixed width, centered vertically */}
     <Box
       sx={{
-        width: 64,
+        width: { xs: 48, sm: 64 },
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         height: '100%',
-        mr: marginFromIcon ?? 5,
+        mr: marginFromIcon || { xs: 1, sm: 2.5, md: 5 },
       }}
     >
       {icon}
@@ -86,8 +86,10 @@ export const GenericSideIconButton = ({
         variant='h5'
         component='div'
         fontWeight={titleFontWeight ?? 700}
-        fontSize={titleFontSize ?? '1.2rem'}
-        sx={{ color: '#fff' }}
+        sx={{ 
+          color: '#fff',
+          fontSize: titleFontSize || { xs: '1.1rem', sm: '1.25rem' }
+        }}
       >
         {title}
       </Typography>
@@ -95,8 +97,11 @@ export const GenericSideIconButton = ({
         variant='subtitle2'
         component='div'
         fontWeight={subtitleFontWeight ?? 500}
-        fontSize={subtitleFontSize ?? '0.8rem'}
-        sx={{ color: '#fff', opacity: 0.85 }}
+        sx={{ 
+            color: '#fff', 
+            opacity: 0.85,
+            fontSize: subtitleFontSize || { xs: '0.8rem', sm: '0.875rem' }
+          }}
       >
         {subtitle}
       </Typography>

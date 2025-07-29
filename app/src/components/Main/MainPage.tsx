@@ -16,17 +16,19 @@ export const MainPage = () => {
         maxWidth: '100%',
         flexDirection: 'column',
         alignItems: 'center',
+        px: { xs: 2, sm: 4, md: 6 }, // Responsive padding
       }}
     >
       <Box
         sx={{
           display: 'flex',
-          flexDirection: 'row',
+          flexDirection: { xs: 'column', md: 'row' }, // Stack on mobile, side-by-side on desktop
           maxWidth: '100%',
           alignItems: 'center',
           justifyContent: 'center',
           cursor: 'pointer',
-          py: 10,
+          gap: { xs: 4, md: 8 }, // Use gap instead of margins
+          py: { xs: 4, sm: 6, md: 10 },
         }}
       >
         <ChessboardComponent
@@ -37,10 +39,16 @@ export const MainPage = () => {
           sx={{
             display: 'flex',
             flexDirection: 'column',
-            ml: 10,
+            width: { xs: '100%', md: 'auto' },
           }}
         >
-          <Typography variant='h2'>
+          <Typography
+            variant='h2'
+            sx={{
+              fontSize: { xs: '3rem', sm: '3.25rem', md: '3.75rem' }, // Responsive font sizes
+              textAlign: 'center',
+            }}
+          >
             {' '}
             Play Chess Online <br /> on <b>Gambit!</b>
           </Typography>
@@ -48,7 +56,12 @@ export const MainPage = () => {
             icon={<FaChessKnight size={45} />}
             title='Play Online'
             subtitle='Play with someone your level'
-            sx={{ mt: 5 }}
+            sx={{
+              width: '100%',
+              height: { xs: 80, sm: 100 }, // Smaller buttons on mobile
+              borderRadius: 3,
+              mt: { xs: 2, md: 5 },
+            }}
           />
           <GenericSideIconButton
             icon={<FaLaptop size={45} />}
@@ -56,7 +69,12 @@ export const MainPage = () => {
             subtitle='Play vs. customizable training bots'
             customBg='#454341'
             customHover='#222'
-            sx={{ mt: 3 }}
+            sx={{ 
+              width: '100%',
+              height: { xs: 80, sm: 100 },
+              borderRadius: 3, 
+              mt: { xs: 2, md: 3 }
+            }}
           />
         </Box>
       </Box>

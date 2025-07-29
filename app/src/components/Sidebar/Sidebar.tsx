@@ -12,14 +12,14 @@ export const Sidebar = () => {
   return (
     <Box
       sx={{
-        width: 150,
+        width: { xs: 0, sm: 150 }, // Hide on mobile, scale up on larger screens
+        display: { xs: 'none', sm: 'flex' }, // Hide completely on mobile
         bgcolor: '#262522',
         color: '#fff',
         minHeight: '100vh',
-        display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        py: 12,
+        py: { xs: 2, sm: 6, md: 12 }, // Responsive padding
       }}
     >
       {/** Upper component below image in sidebar */}

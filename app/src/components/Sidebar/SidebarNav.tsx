@@ -5,7 +5,7 @@ import SportsEsportsOutlinedIcon from '@mui/icons-material/SportsEsportsOutlined
 export const SidebarNav = () => {
   return (
     <List>
-      <NavTab icon={<SportsEsportsOutlinedIcon />} label="Play" />
+      <NavTab icon={<SportsEsportsOutlinedIcon />} label='Play' />
     </List>
   );
-}
+};

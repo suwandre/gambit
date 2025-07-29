@@ -10,17 +10,12 @@ import { WalletOptions } from './WalletOptions';
 type LoginModalProps = {
   open: boolean;
   onClose: () => void;
-  onSignupClick?: () => void;
-  onMetaMaskConnect?: () => void; // handler for connecting wallet
 };
 
 export function LoginModal({
   open,
   onClose,
-  onSignupClick,
-  onMetaMaskConnect,
 }: LoginModalProps) {
-
   return (
     <Dialog
       open={open}
@@ -28,10 +23,9 @@ export function LoginModal({
       slotProps={{
         paper: {
           sx: {
-            borderRadius: 3,
-            p: 2,
-            minWidth: 400,
-            maxWidth: 500,
+            borderRadius: { xs: 0, sm: 3 }, // No radius on mobile
+            minWidth: { xs: '80%', sm: 300 },
+            maxWidth: { xs: '80%', sm: 400 },
             overflow: 'visible',
           },
         },
