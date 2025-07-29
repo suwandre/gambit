@@ -9,10 +9,20 @@ export const WalletOptions = () => {
   return connectors.map((connector) => (
     <GenericSideIconButton
       title={`Login with ${connector.name}`}
-      icon={<Image src='/metamask.svg' alt='Metamask Logo' width={28} height={28} style={{ marginRight: '1.75rem' }} />}
+      icon={
+        <Image
+          src='/metamask.svg'
+          alt='Metamask Logo'
+          width={28}
+          height={28}
+          style={{ marginRight: '1.75rem' }}
+        />
+      }
       key={connector.uid}
       titleFontSize='1rem'
       marginFromIcon={1.5}
+      height={60}
+      minWidth={340}
       sx={{
         backgroundColor: '#1E1D1A',
         color: '#DCDCDC',
@@ -21,7 +31,7 @@ export const WalletOptions = () => {
           backgroundColor: 'rgba(0, 0, 0, 0.8)',
         },
       }}
-      onClick={() => console.log(`Test login with ${connector.name}`)} // YOU connect here
+      onClick={() => connect({ connector })}
     />
   ));
 };

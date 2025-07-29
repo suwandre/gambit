@@ -23,7 +23,7 @@ export const abstractMainnet: Chain = {
 // Wagmi config
 const config = createConfig({
   chains: [abstractMainnet],
-  connectors: [injected(), metaMask()],
+  connectors: [metaMask()],
   transports: {
     [abstractMainnet.id]: http(abstractMainnet.rpcUrls.default.http[0]),
   }

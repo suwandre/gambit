@@ -14,6 +14,9 @@ type GenericSideIconButtonProps = ButtonProps & {
   subtitleFontWeight?: number;
   // Margin from icon to title/subtitle
   marginFromIcon?: number;
+  height?: number;
+  width?: number | string;
+  minWidth?: number | string;
 };
 
 export const GenericSideIconButton = ({
@@ -27,6 +30,9 @@ export const GenericSideIconButton = ({
   subtitleFontWeight,
   subtitleFontSize,
   marginFromIcon,
+  height,
+  width,
+  minWidth,
   sx,
   ...props
 }: GenericSideIconButtonProps) => (
@@ -37,9 +43,9 @@ export const GenericSideIconButton = ({
       backgroundColor: customBg ?? '#81B64C',
       color: '#fff',
       borderRadius: 3,
-      height: 100,
-      width: '100%',
-      minWidth: 340,
+      height: height ?? 100,
+      width: width ?? '100%',
+      minWidth: minWidth ?? 340,
       textTransform: 'none',
       justifyContent: 'center',
       alignItems: 'stretch',
