@@ -21,7 +21,7 @@ import React from 'react';
 export default function Home() {
   return (
     <ResponsiveLayout>
-      <Container maxWidth="lg">
+      <Container maxWidth={false} disableGutters>
         <MainPage />
       </Container>
     </ResponsiveLayout>
