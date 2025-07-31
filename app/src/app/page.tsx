@@ -1,22 +1,29 @@
 'use client';
 
+import { ResponsiveLayout } from '@/components/Layout/ResponsiveLayout';
 import { MainPage } from '@/components/Main/MainPage';
-import { MobileNav } from '@/components/Sidebar/MobileNav';
 import { Sidebar } from '@/components/Sidebar/Sidebar';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import React from 'react';
 
+// export default function Home() {
+//   return (
+//     <Container maxWidth={false} disableGutters>
+//       <Box sx={{ display: 'flex', height: '100vh' }}>
+//         <Sidebar />
+//         <MainPage />
+//       </Box>
+//     </Container>
+//   );
+// }
+
 export default function Home() {
   return (
-    <Container maxWidth={false} disableGutters>
-      <Box sx={{ display: 'flex', height: '100vh' }}>
-        <Sidebar />
-        <Box sx={{ flex: 1, overflow: 'hidden' }}> {/* Allow main content to flex */}
-          <MobileNav />
-          <MainPage />
-        </Box>
-      </Box>
-    </Container>
+    <ResponsiveLayout>
+      <Container maxWidth="lg">
+        <MainPage />
+      </Container>
+    </ResponsiveLayout>
   );
 }
