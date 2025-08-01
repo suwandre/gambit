@@ -51,12 +51,15 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { LoginModal } from '../Auth/LoginModal';
 import { Alert, Snackbar, useMediaQuery, useTheme } from '@mui/material';
+import { useAccount } from 'wagmi';
 
 interface SidebarProps {
   variant?: 'permanent' | 'drawer';
 }
 
 export const Sidebar = ({ variant = 'permanent' }: SidebarProps) => {
+  const { isConnected } = useAccount();
+
   // Login modal when login button is clicked
   const [loginOpen, setLoginOpen] = useState(false);
 
@@ -64,6 +67,7 @@ export const Sidebar = ({ variant = 'permanent' }: SidebarProps) => {
     setLoginOpen(true);
   };
 
+  // Snackbar to show success or error while logging in
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarContent, setSnackbarContent] = useState({
     message: '',
@@ -114,8 +118,11 @@ export const Sidebar = ({ variant = 'permanent' }: SidebarProps) => {
         />
         <SidebarNav />
       </Box>
+      
       {/** Lower component at the bottom of the sidebar */}
-      <SidebarLoginButton onClick={handleLoginClick} />
+      {/* Only show login button if user is not connected */}
+      {!isConnected && <SidebarLoginButton onClick={handleLoginClick} />}
+
       {/** Login modal; opened when login button is clicked */}
       <LoginModal
         open={loginOpen}
