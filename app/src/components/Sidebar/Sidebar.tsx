@@ -50,7 +50,7 @@ import { SidebarLoginButton } from '../Button/LoginButton';
 import Image from 'next/image';
 import { useState } from 'react';
 import { LoginModal } from '../Auth/LoginModal';
-import { useMediaQuery, useTheme } from '@mui/material';
+import { Alert, Snackbar, useMediaQuery, useTheme } from '@mui/material';
 
 interface SidebarProps {
   variant?: 'permanent' | 'drawer';
@@ -62,6 +62,30 @@ export const Sidebar = ({ variant = 'permanent' }: SidebarProps) => {
 
   const handleLoginClick = () => {
     setLoginOpen(true);
+  };
+
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarContent, setSnackbarContent] = useState({
+    message: '',
+    severity: 'info' as 'success' | 'error' | 'info' | 'warning',
+  });
+
+  const handleShowSnackbar = (
+    message: string,
+    severity: 'success' | 'error' | 'info' | 'warning'
+  ) => {
+    setSnackbarContent({ message, severity });
+    setSnackbarOpen(true);
+  };
+
+  const handleSnackbarClose = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setSnackbarOpen(false);
   };
 
   return (
@@ -93,7 +117,44 @@ export const Sidebar = ({ variant = 'permanent' }: SidebarProps) => {
       {/** Lower component at the bottom of the sidebar */}
       <SidebarLoginButton onClick={handleLoginClick} />
       {/** Login modal; opened when login button is clicked */}
-      <LoginModal open={loginOpen} onClose={() => setLoginOpen(false)} />
+      <LoginModal
+        open={loginOpen}
+        onClose={() => setLoginOpen(false)}
+        onShowSnackbar={handleShowSnackbar}
+      />
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={5000}
+        onClose={handleSnackbarClose}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'center',
+        }}
+      >
+        <Alert
+          onClose={handleSnackbarClose}
+          severity={snackbarContent.severity}
+          variant='filled'
+          sx={{
+            width: '100%',
+            fontSize: '0.95rem',
+            '&.MuiAlert-filledSuccess': {
+              backgroundColor: '#81B64C',
+              '& .MuiAlert-icon': {
+                color: 'white',
+              },
+              '& .MuiIconButton-root': {
+                color: 'white',
+                '&:hover': {
+                  backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                },
+              },
+            },
+          }}
+        >
+          {snackbarContent.message}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };

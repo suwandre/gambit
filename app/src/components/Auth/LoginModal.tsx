@@ -10,11 +10,12 @@ import { WalletOptions } from './WalletOptions';
 type LoginModalProps = {
   open: boolean;
   onClose: () => void;
+  onShowSnackbar?: (message: string, severity: 'success' | 'error' | 'info' | 'warning') => void;
 };
-
 export function LoginModal({
   open,
   onClose,
+  onShowSnackbar,
 }: LoginModalProps) {
   return (
     <Dialog
@@ -68,7 +69,7 @@ export function LoginModal({
 
         <DialogContent>
           <Box display='flex' flexDirection='column' gap={2} mt={2}>
-            <WalletOptions />
+            <WalletOptions closeLoginModal={onClose} onShowSnackbar={onShowSnackbar} />
           </Box>
         </DialogContent>
       </Box>
