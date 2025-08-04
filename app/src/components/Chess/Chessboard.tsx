@@ -24,9 +24,9 @@ export const ChessboardComponent = ({
 
   // Responsive square sizing
   const getSquareSize = () => {
-    if (isMobile) return 32; // Small squares on mobile
-    if (isTablet) return 48; // Medium squares on tablet
-    return 60; // Full size on desktop
+    if (isMobile) return 0.533 * squareSize; // 53.3% of the default size on mobile
+    if (isTablet) return 0.8 * squareSize;
+    return squareSize; // Full size on desktop
   };
 
   squareSize = getSquareSize();

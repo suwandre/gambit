@@ -59,7 +59,7 @@ export const Sidebar = ({ variant = 'permanent' }: SidebarProps) => {
   return (
     <Box
       sx={{
-        width: variant === 'drawer' ? '100%' : { xs: 150 },
+        width: variant === 'drawer' ? '100%' : { xs: 175 },
         display: 'flex',
         bgcolor: '#262522',
         color: '#fff',

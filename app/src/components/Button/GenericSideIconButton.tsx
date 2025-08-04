@@ -16,7 +16,6 @@ type GenericSideIconButtonProps = ButtonProps & {
   marginFromIcon?: number;
   height?: number;
   width?: number | string;
-  minWidth?: number | string;
 };
 
 export const GenericSideIconButton = ({
@@ -32,7 +31,6 @@ export const GenericSideIconButton = ({
   marginFromIcon,
   height,
   width,
-  minWidth,
   sx,
   ...props
 }: GenericSideIconButtonProps) => (
@@ -45,7 +43,7 @@ export const GenericSideIconButton = ({
       borderRadius: 3,
       height: height || { xs: 80, sm: 100 }, // Responsive default height
       width: width ?? '100%',
-      minWidth: minWidth || { xs: 280, sm: 340 }, // Responsive minimum width
+      minWidth: { xs: 280, sm: 340 }, // Responsive minimum width
       textTransform: 'none',
       justifyContent: 'center',
       alignItems: 'stretch',
