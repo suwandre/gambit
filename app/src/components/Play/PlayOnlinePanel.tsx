@@ -55,6 +55,7 @@ export const PlayOnlinePanel = () => {
         bgcolor: '#262522',
         color: '#fff',
         borderRadius: 2,
+        minHeight: {xs: '60vh', md: '80%'}
       }}
     >
       {/* Tabs */}
@@ -67,7 +68,14 @@ export const PlayOnlinePanel = () => {
             '& .MuiTab-root': {
               textTransform: 'none',
               fontWeight: 600,
-              color: '#fff',
+              color: '#aaa', // ← unselected tab color
+            },
+            '& .MuiTab-root.Mui-selected': {
+              color: '#fff', // ← selected tab text color
+            },
+            '& .MuiTabs-indicator': {
+              backgroundColor: '#759B00', // ← underline color (matches the start game button
+              height: 3, // ← underline height
             },
           }}
         >
