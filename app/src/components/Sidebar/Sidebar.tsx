@@ -1,57 +1,11 @@
-// import Box from '@mui/material/Box';
-// import { SidebarNav } from './SidebarNav';
-// import { SidebarLoginButton } from '../Button/LoginButton';
-// import Image from 'next/image';
-// import { useState } from 'react';
-// import { LoginModal } from '../Auth/LoginModal';
-// import { useMediaQuery, useTheme } from '@mui/material';
-
-// export const Sidebar = () => {
-//   // Login modal when login button is clicked
-//   const [loginOpen, setLoginOpen] = useState(false);
-
-//   return (
-//     <Box
-//       sx={{
-//         width: { xs: 0, sm: 150 }, // Hide on mobile, scale up on larger screens
-//         display: { xs: 'none', sm: 'flex' }, // Hide completely on mobile
-//         bgcolor: '#262522',
-//         color: '#fff',
-//         minHeight: '100vh',
-//         flexDirection: 'column',
-//         justifyContent: 'space-between',
-//         py: { xs: 2, sm: 6, md: 12 }, // Responsive padding
-//       }}
-//     >
-//       {/** Upper component below image in sidebar */}
-//       <Box
-//         sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
-//       >
-//         <Image
-//           src='/gambit.png'
-//           alt='Gambit Logo'
-//           width={500}
-//           height={500}
-//           priority
-//         />
-//         <SidebarNav />
-//       </Box>
-//       {/** Lower component at the bottom of the sidebar */}
-//       <SidebarLoginButton onClick={() => setLoginOpen(true)} />
-//       {/** Login modal; opened when login button is clicked */}
-//       <LoginModal open={loginOpen} onClose={() => setLoginOpen(false)} />
-//     </Box>
-//   );
-// };
-
 import Box from '@mui/material/Box';
 import { SidebarNav } from './SidebarNav';
-import { SidebarLoginButton } from '../Button/LoginButton';
+import { AuthButton } from '../Button/AuthButton';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { LoginModal } from '../Auth/LoginModal';
-import { Alert, Snackbar, useMediaQuery, useTheme } from '@mui/material';
-import { useAccount } from 'wagmi';
+import { Alert, Snackbar } from '@mui/material';
+import { useAccount, useDisconnect } from 'wagmi';
 
 interface SidebarProps {
   variant?: 'permanent' | 'drawer';
@@ -59,13 +13,19 @@ interface SidebarProps {
 
 export const Sidebar = ({ variant = 'permanent' }: SidebarProps) => {
   const { isConnected } = useAccount();
+  const { disconnect } = useDisconnect();
 
   // Login modal when login button is clicked
   const [loginOpen, setLoginOpen] = useState(false);
 
-  const handleLoginClick = () => {
-    setLoginOpen(true);
-  };
+  // Call `disconnect` if connected, otherwise open login modal
+  const handleAuthButtonClick = () => {
+    if (isConnected) {
+      disconnect();
+    } else {
+      setLoginOpen(true);
+    }
+  }
 
   // Snackbar to show success or error while logging in
   const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -74,13 +34,13 @@ export const Sidebar = ({ variant = 'permanent' }: SidebarProps) => {
     severity: 'info' as 'success' | 'error' | 'info' | 'warning',
   });
 
-  const handleShowSnackbar = (
-    message: string,
-    severity: 'success' | 'error' | 'info' | 'warning'
-  ) => {
-    setSnackbarContent({ message, severity });
-    setSnackbarOpen(true);
-  };
+  const handleShowSnackbar = useCallback(
+    (message: string, severity: 'success' | 'error' | 'info' | 'warning') => {
+      setSnackbarContent({ message, severity });
+      setSnackbarOpen(true);
+    },
+    []
+  );
 
   const handleSnackbarClose = (
     event?: React.SyntheticEvent | Event,
@@ -91,6 +51,10 @@ export const Sidebar = ({ variant = 'permanent' }: SidebarProps) => {
     }
     setSnackbarOpen(false);
   };
+
+  const handleCloseLoginModal = useCallback(() => {
+    setLoginOpen(false);
+  }, []);
 
   return (
     <Box
@@ -118,15 +82,13 @@ export const Sidebar = ({ variant = 'permanent' }: SidebarProps) => {
         />
         <SidebarNav />
       </Box>
-      
-      {/** Lower component at the bottom of the sidebar */}
-      {/* Only show login button if user is not connected */}
-      {!isConnected && <SidebarLoginButton onClick={handleLoginClick} />}
 
+      {/** Lower component at the bottom of the sidebar */}
+      <AuthButton onClick={handleAuthButtonClick} />
       {/** Login modal; opened when login button is clicked */}
       <LoginModal
         open={loginOpen}
-        onClose={() => setLoginOpen(false)}
+        onClose={handleCloseLoginModal}
         onShowSnackbar={handleShowSnackbar}
       />
       <Snackbar

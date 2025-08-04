@@ -12,19 +12,32 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import Image from 'next/image';
 import { NavTab } from '../Sidebar/NavTab';
-import { SidebarLoginButton } from '../Button/LoginButton';
 import { LoginModal } from '../Auth/LoginModal';
 import SportsEsportsOutlinedIcon from '@mui/icons-material/SportsEsportsOutlined';
 import { Sidebar } from '../Sidebar/Sidebar';
+import { AuthButton } from '../Button/AuthButton';
+import { useAccount, useDisconnect } from 'wagmi';
 
 export const AppBar = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
   const theme = useTheme();
 
+  const { isConnected } = useAccount();
+  const { disconnect } = useDisconnect();
+
   const toggleDrawer = () => {
     setDrawerOpen(!drawerOpen);
   };
+
+  // Call `disconnect` if connected, otherwise open login modal
+  const handleAuthButtonClick = () => {
+    if (isConnected) {
+      disconnect();
+    } else {
+      setLoginOpen(true);
+    }
+  }
 
   const drawerContent = (
     <Box sx={{ width: 250, pt: 2, display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'space-between' }}>
@@ -54,10 +67,10 @@ export const AppBar = () => {
 
       {/* Login button at bottom of drawer */}
       <Box>
-        <SidebarLoginButton 
+        <AuthButton 
           onClick={() => {
             setDrawerOpen(false);
-            setLoginOpen(true);
+            handleAuthButtonClick();
           }} 
         />
       </Box>
@@ -98,7 +111,7 @@ export const AppBar = () => {
           </Box>
 
           {/* Login button on the right */}
-          <SidebarLoginButton onClick={() => setLoginOpen(true)} />
+          <AuthButton onClick={handleAuthButtonClick} />
         </Toolbar>
       </MuiAppBar>
 
