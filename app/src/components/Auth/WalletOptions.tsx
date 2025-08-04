@@ -124,7 +124,6 @@ export const WalletOptions = ({
             titleFontSize='1rem'
             marginFromIcon={1.5}
             height={60}
-            minWidth={340}
             disabled={isThisConnectorLoading || isPending}
             sx={{
               backgroundColor: '#1E1D1A',
